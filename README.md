@@ -4,10 +4,10 @@ Summarization plugin for Connery.
 
 ## Available actions
 
-| Action                                        | Description                           |
-| --------------------------------------------- | ------------------------------------- |
+| Action                                                             | Description                                |
+| ------------------------------------------------------------------ | ------------------------------------------ |
 | [Summarize public webpage](/src/actions/summarizePublicWebpage.ts) | Summarize public webpage using OpenAI API. |
-| [Summarize text](/src/actions/summarizeText.ts) | Summarize a long text using OpenAI API. |
+| [Summarize text](/src/actions/summarizeText.ts)                    | Summarize a long text using OpenAI API.    |
 
 ## Repository structure
 
