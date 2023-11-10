@@ -48,7 +48,7 @@ export async function handler({
   configurationParameters,
 }: ActionContext): Promise<OutputParametersObject> {
   // Fetch the HTML content from the provided URL
-  const response = await axios.get(inputParameters.publicPageUrl);
+  const response = await axios.get(inputParameters.publicWebpageUrl);
   const html = response.data;
 
   // Parse the HTML content and extract the text
