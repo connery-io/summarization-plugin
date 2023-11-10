@@ -1,6 +1,8 @@
 {
   "dependencies": {
     "@connery-io/sdk": "^0.0.13",
+    "axios": "^1.6.1",
+    "cheerio": "^1.0.0-rc.12",
     "openai": "^4.17.3"
   },
   "devDependencies": {
