@@ -6,7 +6,7 @@ import OpenAI from 'openai';
 const action: ActionDefinition = {
   key: 'summarizePublicWebpage',
   title: 'Summarize public webpage',
-  description: 'Summarize public webpage using OpenAI API.',
+  description: 'Summarize public webpage.',
   type: 'read',
   inputParameters: [
     {

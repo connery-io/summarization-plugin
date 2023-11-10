@@ -4,7 +4,7 @@ import summarizeText from './actions/summarizeText';
 
 const plugin: PluginDefinition = {
   title: 'Summarization plugin',
-  description: 'Summarization plugin for Connery.',
+  description: 'Summarize text and public webpages using OpenAI API.',
   actions: [summarizePublicWebpage, summarizeText],
   configurationParameters: [
     {

@@ -4,7 +4,7 @@ import OpenAI from 'openai';
 const action: ActionDefinition = {
   key: 'summarizeText',
   title: 'Summarize text',
-  description: 'Summarize a long text using OpenAI API.',
+  description: 'Summarize a long text.',
   type: 'read',
   inputParameters: [
     {

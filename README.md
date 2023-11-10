@@ -1,13 +1,18 @@
 # Summarization plugin
 
-Summarization plugin for Connery.
+Summarize text and public webpages using OpenAI API.
+
+When configuring the plugin on the runner, we recommend using the LLM model with a context window size of 16k tokens or more. This will let you summarize webpages and long texts.
+
+At the moment of writing, the most balanced model is `gpt-3.5-turbo-1106` in terms of price and quality.
+The full list of models can be found [here](https://platform.openai.com/docs/models).
 
 ## Available actions
 
-| Action                                                             | Description                                |
-| ------------------------------------------------------------------ | ------------------------------------------ |
-| [Summarize public webpage](/src/actions/summarizePublicWebpage.ts) | Summarize public webpage using OpenAI API. |
-| [Summarize text](/src/actions/summarizeText.ts)                    | Summarize a long text using OpenAI API.    |
+| Action                                                             | Description               |
+| ------------------------------------------------------------------ | ------------------------- |
+| [Summarize public webpage](/src/actions/summarizePublicWebpage.ts) | Summarize public webpage. |
+| [Summarize text](/src/actions/summarizeText.ts)                    | Summarize a long text.    |
 
 ## Repository structure
 
