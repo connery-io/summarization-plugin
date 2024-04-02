@@ -1,9 +1,9 @@
-import { ActionDefinition, ActionContext, OutputParametersObject } from '@connery-io/sdk';
+import { ActionDefinition, ActionContext, OutputObject } from 'connery';
 import * as cheerio from 'cheerio';
 import axios from 'axios';
 import OpenAI from 'openai';
 
-const action: ActionDefinition = {
+const actionDefinition: ActionDefinition = {
   key: 'summarizePublicWebpage',
   title: 'Summarize public webpage',
   description: 'Summarize public webpage.',
@@ -41,30 +41,26 @@ const action: ActionDefinition = {
     },
   ],
 };
-export default action;
+export default actionDefinition;
 
-export async function handler({
-  inputParameters,
-  configurationParameters,
-}: ActionContext): Promise<OutputParametersObject> {
+export async function handler({ input, configuration }: ActionContext): Promise<OutputObject> {
   // Fetch the HTML content from the provided URL
-  const response = await axios.get(inputParameters.publicWebpageUrl);
+  const response = await axios.get(input.publicWebpageUrl);
   const html = response.data;
 
   // Parse the HTML content and extract the text
   const $ = cheerio.load(html);
   const textToSummarize = $('body').text();
 
-  const systemInstructions =
-    inputParameters.customInstructions || 'Provide a concise, neutral summary of the essential points.';
+  const systemInstructions = input.customInstructions || 'Provide a concise, neutral summary of the essential points.';
   const prompt = `Text to summarize: ${textToSummarize}\n\nSummary:`;
 
   const openai = new OpenAI({
-    apiKey: configurationParameters.openAiApiKey,
+    apiKey: configuration.openAiApiKey,
   });
 
   const completion = await openai.chat.completions.create({
-    model: configurationParameters.openAiModel,
+    model: configuration.openAiModel,
     temperature: 0.7,
     messages: [
       { role: 'system', content: systemInstructions },
@@ -73,6 +69,6 @@ export async function handler({
   });
 
   return {
-    summary: completion.choices[0].message.content,
+    summary: completion.choices[0].message.content ?? 'No summary available.',
   };
 }

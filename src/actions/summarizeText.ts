@@ -1,7 +1,7 @@
-import { ActionDefinition, ActionContext, OutputParametersObject } from '@connery-io/sdk';
+import { ActionDefinition, ActionContext, OutputObject } from 'connery';
 import OpenAI from 'openai';
 
-const action: ActionDefinition = {
+const actionDefinition: ActionDefinition = {
   key: 'summarizeText',
   title: 'Summarize text',
   description: 'Summarize a long text.',
@@ -39,22 +39,18 @@ const action: ActionDefinition = {
     },
   ],
 };
-export default action;
+export default actionDefinition;
 
-export async function handler({
-  inputParameters,
-  configurationParameters,
-}: ActionContext): Promise<OutputParametersObject> {
-  const systemInstructions =
-    inputParameters.customInstructions || 'Provide a concise, neutral summary of the essential points.';
-  const prompt = `Text to summarize: ${inputParameters.textToSummarize}\n\nSummary:`;
+export async function handler({ input, configuration }: ActionContext): Promise<OutputObject> {
+  const systemInstructions = input.customInstructions || 'Provide a concise, neutral summary of the essential points.';
+  const prompt = `Text to summarize: ${input.textToSummarize}\n\nSummary:`;
 
   const openai = new OpenAI({
-    apiKey: configurationParameters.openAiApiKey,
+    apiKey: configuration.openAiApiKey,
   });
 
   const completion = await openai.chat.completions.create({
-    model: configurationParameters.openAiModel,
+    model: configuration.openAiModel,
     temperature: 0.7,
     messages: [
       { role: 'system', content: systemInstructions },
@@ -63,6 +59,6 @@ export async function handler({
   });
 
   return {
-    summary: completion.choices[0].message.content,
+    summary: completion.choices[0].message.content ?? 'No summary available.',
   };
 }
