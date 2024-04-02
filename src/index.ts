@@ -1,8 +1,8 @@
-import { PluginDefinition } from '@connery-io/sdk';
-import summarizePublicWebpage from './actions/summarizePublicWebpage';
-import summarizeText from './actions/summarizeText';
+import { PluginDefinition, startPluginServer } from 'connery';
+import summarizePublicWebpage from './actions/summarizePublicWebpage.js';
+import summarizeText from './actions/summarizeText.js';
 
-const plugin: PluginDefinition = {
+const pluginDefinition: PluginDefinition = {
   title: 'Summarization plugin',
   description: 'Summarize text and public webpages using OpenAI API.',
   actions: [summarizePublicWebpage, summarizeText],
@@ -31,8 +31,6 @@ const plugin: PluginDefinition = {
       email: 'support@connery.io',
     },
   ],
-  connery: {
-    runnerVersion: '0',
-  },
 };
-export default plugin;
+
+startPluginServer(pluginDefinition);
