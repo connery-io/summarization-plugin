@@ -1,4 +1,4 @@
-import { PluginDefinition, startPluginServer } from 'connery';
+import { PluginDefinition, setupPluginServer } from 'connery';
 import summarizePublicWebpage from './actions/summarizePublicWebpage.js';
 import summarizeText from './actions/summarizeText.js';
 
@@ -33,4 +33,5 @@ const pluginDefinition: PluginDefinition = {
   ],
 };
 
-startPluginServer(pluginDefinition);
+const handler = await setupPluginServer(pluginDefinition);
+export default handler;
